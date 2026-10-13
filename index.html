@@ -1,36 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Sakis Kontaksis</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sakis Kontaksis</title>
+    <meta name="description" content="Sakis Kontaksis — web developer.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="first">
-        <h1 class="firsttext">I'm Sakis</h1>
-        <h2>a <span>pro</span>grammer.</h2>
-        
-    </div>
-    <div class="mid">
-        <img class="imgme" src="./me.jpg"/>
-        <h2>Hello.</h2>
-        <p>I am a web dev.</p>
-    </div>  
-    <div class="bot">
-         <h2>My Skills</h2>
-        <ul class="list">
-         <li>
-            <p>Coding in HTML and CSS is like crafting the web’s foundation and adding its beauty. With every tag and style, you bring ideas to life, shaping websites that are both functional and visually stunning. It’s a creative journey where logic meets design, and the possibilities are endless.</p>
-         </li>
-         <li><p>Skiing is pure joy for winter lovers, combining the thrill of gliding through fresh snow with the beauty of the mountains. Whether tackling challenging slopes or enjoying peaceful trails, it’s an exhilarating escape that connects you to nature and adventure.</p></li>
-        </ul> 
-        <a class="btn" href="mailto:akontaksis@hotmail.com">CONTACT ME</a>
-    </div>
-    <div class="footer">
-        <a class="footer-link" href="https://www.linkedin.com/in/thanasis-kontaksis-3b58562b4/">LinkedIn</a>
-        <a class="footer-link" href="https://www.instagram.com/sakiskontaksis/?hl=el">Instagram</a>
-    </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <header class="nav">
+        <a class="nav-logo" href="#top">Sakis</a>
+        <nav class="nav-links">
+            <a href="#about" data-i18n="nav.about">About</a>
+            <a href="#skills" data-i18n="nav.skills">Skills</a>
+            <a href="#contact" data-i18n="nav.contact">Contact</a>
+            <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Ελληνικά">ΕΛ</button>
+        </nav>
+    </header>
+
+    <main id="top">
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <p class="hero-eyebrow" data-i18n="hero.eyebrow">Hi there, I'm</p>
+                <h1 class="hero-title">Sakis Kontaksis</h1>
+                <p class="hero-subtitle" data-i18n-html="hero.subtitle">a <span class="highlight">pro</span>grammer.</p>
+                <a class="btn" href="#contact" data-i18n="hero.cta">Get in touch</a>
+            </div>
+            <a class="hero-scroll" href="#about" aria-label="Scroll to about section" data-i18n-aria="hero.scroll"></a>
+        </section>
+
+        <section class="section about" id="about">
+            <div class="container about-grid reveal">
+                <img class="about-photo" src="./me.jpg" alt="Portrait of Sakis Kontaksis" data-i18n-alt="about.alt">
+                <div>
+                    <h2 class="section-title" data-i18n="about.title">Hello.</h2>
+                    <p class="lead" data-i18n="about.text">I am a web dev.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="beam" aria-hidden="true"></div>
+
+        <section class="section skills" id="skills">
+            <div class="container">
+                <h2 class="section-title" data-i18n="skills.title">My Skills</h2>
+                <div class="cards">
+                    <article class="card reveal">
+                        <div class="card-icon" aria-hidden="true">&lt;/&gt;</div>
+                        <h3>HTML &amp; CSS</h3>
+                        <p data-i18n="skills.code">Coding in HTML and CSS is like crafting the web’s foundation and adding its beauty. With every tag and style, you bring ideas to life, shaping websites that are both functional and visually stunning. It’s a creative journey where logic meets design, and the possibilities are endless.</p>
+                    </article>
+                    <article class="card reveal">
+                        <div class="card-icon" aria-hidden="true">&#9975;</div>
+                        <h3 data-i18n="skills.skiTitle">Skiing</h3>
+                        <p data-i18n="skills.ski">Skiing is pure joy for winter lovers, combining the thrill of gliding through fresh snow with the beauty of the mountains. Whether tackling challenging slopes or enjoying peaceful trails, it’s an exhilarating escape that connects you to nature and adventure.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section showcase" id="showcase">
+            <div class="showcase-bg" aria-hidden="true">
+                <span class="blob blob-1"></span>
+                <span class="blob blob-2"></span>
+                <span class="blob blob-3"></span>
+            </div>
+            <div class="container">
+                <div class="showcase-head reveal">
+                    <p class="showcase-eyebrow" data-i18n="show.eyebrow">What I bring</p>
+                    <h2 class="showcase-title">
+                        <span data-i18n="show.title1">Code that</span>
+                        <span class="gradient-text" data-i18n="show.title2">moves.</span>
+                    </h2>
+                    <p class="showcase-lead" data-i18n="show.lead">I combine modern web development, smooth animations and AI-powered workflows to ship fast, polished experiences.</p>
+                </div>
+
+                <div class="showcase-grid">
+                    <div class="terminal reveal">
+                        <div class="terminal-bar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <p class="terminal-title">ai-session — zsh</p>
+                        </div>
+                        <pre class="terminal-body"><code id="terminal"></code><span class="cursor" aria-hidden="true"></span></pre>
+                    </div>
+
+                    <div class="features">
+                        <article class="feature reveal">
+                            <div class="feature-icon" aria-hidden="true">AI</div>
+                            <div>
+                                <h3 data-i18n="show.f1Title">AI-powered development</h3>
+                                <p data-i18n="show.f1Text">I build with AI coding agents and LLMs: from prompt engineering to automated workflows, I ship features faster without cutting corners.</p>
+                            </div>
+                        </article>
+                        <article class="feature reveal">
+                            <div class="feature-icon" aria-hidden="true">&#10022;</div>
+                            <div>
+                                <h3 data-i18n="show.f2Title">Animation &amp; motion</h3>
+                                <p data-i18n="show.f2Text">Keyframes, transitions, scroll effects and micro-interactions that make interfaces feel alive, like the ones on this page.</p>
+                            </div>
+                        </article>
+                        <article class="feature reveal">
+                            <div class="feature-icon" aria-hidden="true">&#9638;</div>
+                            <div>
+                                <h3 data-i18n="show.f3Title">Modern, responsive web</h3>
+                                <p data-i18n="show.f3Text">Clean, accessible code that looks sharp on every screen and loads fast.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <div class="marquee" aria-label="Technologies">
+                <ul class="marquee-track">
+                    <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>CSS Animations</li><li>Responsive Design</li><li>AI Agents</li><li>Prompt Engineering</li><li>LLMs</li><li>Git &amp; GitHub</li><li>Accessibility</li>
+                    <li aria-hidden="true">HTML5</li><li aria-hidden="true">CSS3</li><li aria-hidden="true">JavaScript</li><li aria-hidden="true">CSS Animations</li><li aria-hidden="true">Responsive Design</li><li aria-hidden="true">AI Agents</li><li aria-hidden="true">Prompt Engineering</li><li aria-hidden="true">LLMs</li><li aria-hidden="true">Git &amp; GitHub</li><li aria-hidden="true">Accessibility</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section contact" id="contact">
+            <div class="container contact-box reveal">
+                <h2 class="section-title" data-i18n="contact.title">Let's work together</h2>
+                <p class="lead" data-i18n="contact.text">Have a project in mind or just want to say hi? My inbox is always open.</p>
+                <a class="btn" href="mailto:akontaksis@hotmail.com" data-i18n="contact.cta">Contact me</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="beam footer-beam" aria-hidden="true"></div>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/thanasis-kontaksis-3b58562b4/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.instagram.com/sakiskontaksis/?hl=el" target="_blank" rel="noopener">Instagram</a>
+        </div>
+        <p class="footer-copy">&copy; <span id="year">2026</span> Sakis Kontaksis</p>
+    </footer>
+
+    <script src="./main.js"></script>
 </body>
 </html>
