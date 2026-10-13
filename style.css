@@ -60,20 +60,33 @@ a {
     inset: 0 0 auto 0;
     z-index: 10;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: clamp(14px, 4vw, 32px);
     padding: 14px clamp(16px, 5vw, 48px);
+    color: #fff;
+    transition: box-shadow 0.4s ease, padding 0.4s ease;
+}
+
+/* The blurred backdrop lives on a pseudo-element: backdrop-filter on .nav itself
+   would trap the fixed mobile menu inside the header */
+.nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     background: rgba(18, 22, 27, 0.35);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    color: #fff;
-    transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+    transition: background 0.4s ease;
 }
 
 .nav.is-scrolled {
     padding-block: 10px;
-    background: rgba(10, 14, 19, 0.78);
     box-shadow: 0 1px 0 rgba(17, 205, 212, 0.3), 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.nav.is-scrolled::before {
+    background: rgba(10, 14, 19, 0.78);
 }
 
 /* Scroll progress */
@@ -95,11 +108,22 @@ a {
     font-size: 2.2rem;
     line-height: 1;
     text-decoration: none;
+    position: relative;
+    z-index: 2;
 }
 
 .nav-links {
     display: flex;
     gap: clamp(14px, 4vw, 32px);
+    margin-left: auto;
+}
+
+.nav-actions {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .nav-links a {
@@ -158,6 +182,111 @@ a {
 .lang-toggle:hover {
     background: #fff;
     color: #12161b;
+}
+
+/* Hamburger (mobile only) */
+.menu-toggle {
+    display: none;
+    position: relative;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    position: absolute;
+    left: 11px;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff;
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.2s, top 0.35s;
+}
+
+.menu-toggle span:nth-child(1) { top: 14px; }
+.menu-toggle span:nth-child(2) { top: 20px; width: 12px; }
+.menu-toggle span:nth-child(3) { top: 26px; }
+
+.nav.menu-open .menu-toggle {
+    border-color: rgba(17, 205, 212, 0.6);
+    box-shadow: 0 0 16px rgba(17, 205, 212, 0.35);
+}
+
+.nav.menu-open .menu-toggle span:nth-child(1) { top: 20px; transform: rotate(45deg); }
+.nav.menu-open .menu-toggle span:nth-child(2) { opacity: 0; transform: translateX(8px); }
+.nav.menu-open .menu-toggle span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
+
+@media (max-width: 719px) {
+    .nav {
+        padding: 10px 16px;
+    }
+
+    .nav-logo {
+        font-size: 1.9rem;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Full-screen overlay menu */
+    .nav-links {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+        margin: 0;
+        background:
+            radial-gradient(circle at 20% 15%, rgba(17, 205, 212, 0.18), transparent 45%),
+            radial-gradient(circle at 85% 85%, rgba(124, 77, 255, 0.2), transparent 45%),
+            rgba(10, 14, 19, 0.94);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+    }
+
+    .nav.menu-open .nav-links {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.4s ease;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(6px);
+        transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.4s ease;
+    }
+
+    .nav.menu-open .nav-links a {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    .nav.menu-open .nav-links a:nth-child(1) { transition-delay: 0.08s; }
+    .nav.menu-open .nav-links a:nth-child(2) { transition-delay: 0.16s; }
+    .nav.menu-open .nav-links a:nth-child(3) { transition-delay: 0.24s; }
+
+    .nav-links a.is-active {
+        color: #11cdd4;
+    }
+}
+
+body.menu-open {
+    overflow: hidden;
 }
 
 /* Hero */

@@ -5,6 +5,7 @@ const translations = {
         "nav.about": "About",
         "nav.skills": "Skills",
         "nav.contact": "Contact",
+        "nav.menu": "Menu",
         "hero.eyebrow": "Hi there, I'm",
         "hero.subtitle": 'a <span class="highlight">pro</span>grammer.',
         "hero.cta": "Get in touch",
@@ -36,6 +37,7 @@ const translations = {
         "nav.about": "Σχετικά",
         "nav.skills": "Δεξιότητες",
         "nav.contact": "Επικοινωνία",
+        "nav.menu": "Μενού",
         "hero.eyebrow": "Γεια! Είμαι",
         "hero.subtitle": '<span class="highlight">Προ</span>γραμματίζω.',
         "hero.cta": "Ας μιλήσουμε",
@@ -164,6 +166,27 @@ if (!reducedMotion) {
     document.querySelectorAll(".section-title, .showcase-title .gradient-text")
         .forEach(el => scrambleObserver.observe(el));
 }
+
+// Mobile menu
+const header = document.querySelector(".nav");
+const menuToggle = document.getElementById("menu-toggle");
+
+function setMenu(open) {
+    header.classList.toggle("menu-open", open);
+    document.body.classList.toggle("menu-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+}
+
+menuToggle.addEventListener("click", () => setMenu(!header.classList.contains("menu-open")));
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => setMenu(false));
+});
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") setMenu(false);
+});
+window.matchMedia("(min-width: 720px)").addEventListener("change", e => {
+    if (e.matches) setMenu(false);
+});
 
 // Active nav link follows the section in view
 const navLinks = document.querySelectorAll(".nav-links a");
